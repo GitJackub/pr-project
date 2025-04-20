@@ -73,8 +73,9 @@ GroupItem {
             icon.source: "images/check.png"
 
             onClicked: {
-                tcpClient.connectToHost(ipInput.text,portInput.text);
+                mainApp.tempCameraSourceIp = ipInput.text
                 mainApp.isConnecting = true
+                tcpClient.connectToHost(ipInput.text,portInput.text);
             }
 
             background: Rectangle {

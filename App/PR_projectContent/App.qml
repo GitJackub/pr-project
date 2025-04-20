@@ -13,6 +13,7 @@ Window {
     property string lastError: ""
     property int enginesPower: 50
     property bool wsadEnabled: false
+    property string tempCameraSourceIp: ""
 
     visible: true
     title: "PR App"
@@ -33,6 +34,7 @@ Window {
         target: tcpClient
         onConnectedToServer: {
             isConnecting = false
+            messages.cameraSource = "http://"+ tempCameraSourceIp +":8080/stream.mp4"
             currentScreen = "app"
             lastError = ""
         }
