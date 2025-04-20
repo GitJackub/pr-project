@@ -9,21 +9,22 @@ qt6_add_qml_module(PR_projectContent
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
-    "VehicleControlConfig.qml"
-    "Screen01.qml"
+        "ConnectPanel.qml"
         "TopBar.ui.qml"
         "App.qml"
-        "ConnectPanel.qml"
-        "VehicleControl.qml"
-        "CameraView.qml"
         "Messages.qml"
         "CameraControl.qml"
+        "VehicleControl.qml"
+        "CameraView.qml"
+        "Screen01.qml"
+        "VehicleControlConfig.qml"
     RESOURCES
-        "images/arrow-downward.png"
-        "images/arrow-upward.png"
         "images/check.png"
-        "images/arrow-turn-around-reverse.png"
+        "images/arrow-downward.png"
         "images/arrow-turn-around.png"
+        "images/appicon.ico"
+        "images/arrow-upward.png"
+        "images/arrow-turn-around-reverse.png"
 )
 
 

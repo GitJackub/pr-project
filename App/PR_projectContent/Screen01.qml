@@ -136,5 +136,5 @@ Item {
             vehicleControl.handeKey(event)
             cameraControl.handleKey(event)
     }
-    Component.onCompleted: root.forceActiveFocus()
+    Component.onCompleted: screen01.forceActiveFocus()
 }
