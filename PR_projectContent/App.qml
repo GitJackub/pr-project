@@ -11,9 +11,11 @@ Window {
     property string currentTab: "control"
     property bool isConnecting: false
     property string lastError: ""
+    property int enginesPower: 50
+    property bool wsadEnabled: false
 
     visible: true
-    title: "PR_project"
+    title: "PR App"
 
     Screen01 {
         id: mainScreen
@@ -44,6 +46,5 @@ Window {
             lastError = message
         }
     }
-
 }
 

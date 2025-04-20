@@ -15,13 +15,14 @@ set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
     CACHE STRING "Import paths for Qt Creator's code model"
     FORCE
 )
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/app_icon.rc")
 
 find_package(Qt6 6.8 REQUIRED COMPONENTS Core Gui Widgets Qml Quick QuickTimeline ShaderTools Network)
 qt_standard_project_setup()
 
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
-  backend/TcpClient.cpp)
+  backend/TcpClient.cpp ${APP_ICON_RESOURCE_WINDOWS})
 
 target_sources(${CMAKE_PROJECT_NAME}
     PRIVATE

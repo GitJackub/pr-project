@@ -54,14 +54,12 @@ GroupItem {
         height: 135
         text: qsTr("Sterowanie WSAD")
         spacing: 20
-        autoExclusive: false
-        checked: false
         display: AbstractButton.TextUnderIcon
         font.pointSize: 30
-    }
-
-    Item {
-        id: controlKeyboard
-        focus: switchControlWSAD
+        checked: mainApp.wsadEnabled
+        onCheckedChanged: {
+            mainApp.wsadEnabled = checked
+            screen01.forceActiveFocus()
+        }
     }
 }

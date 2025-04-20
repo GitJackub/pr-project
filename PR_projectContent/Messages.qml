@@ -7,4 +7,6 @@ QtObject {
     property string vehicleReverse: "Wstecz"
     property string cameraRotateRight: "Kamera w prawo"
     property string cameraRotateLeft: "Kamera w lewo"
+
+    property string cameraSource: "http://192.168.0.101:8080/stream.mp4"
 }

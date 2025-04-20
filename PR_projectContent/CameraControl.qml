@@ -79,4 +79,18 @@ GroupItem {
         text: qsTr("Obrót kamery")
         font.pixelSize: 45
     }
+
+    function handleKey(event) {
+        if (mainApp.wsadEnabled) {
+            switch (event.key) {
+                case Qt.Key_Q:
+                    buttonRotateLeftCamera.clicked()
+                    break
+                case Qt.Key_E:
+                    buttonRotateRightCamera.clicked()
+                    break
+            }
+            event.accepted = true
+        }
+    }
 }

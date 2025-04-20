@@ -14,9 +14,12 @@ import QtQuick.Studio.Components 1.0
 import QtMultimedia
 
 Item {
-    id: root
+    id: screen01
     width: Constants.width
     height: Constants.height
+
+    focus: true
+    Keys.enabled: true
 
     Rectangle {
         id: background
@@ -109,7 +112,7 @@ Item {
             width: 150
             height: 150
             anchors.centerIn: parent
-            opacity: 0.6
+            opacity: 0.5
             color: "#000000"
             visible: mainApp.isConnecting
 
@@ -129,4 +132,9 @@ Item {
             y: 0.7 * connectScreen.height
         }
     }
+    Keys.onPressed: {
+            vehicleControl.handeKey(event)
+            cameraControl.handleKey(event)
+    }
+    Component.onCompleted: root.forceActiveFocus()
 }

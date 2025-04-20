@@ -131,4 +131,24 @@ GroupItem {
             }
         }
     }
+
+    function handeKey(event) {
+        if (mainApp.wsadEnabled) {
+            switch (event.key) {
+                case Qt.Key_W:
+                    buttonForward.clicked()
+                    break
+                case Qt.Key_S:
+                    buttonReverse.clicked()
+                    break
+                case Qt.Key_A:
+                    buttonRotateLeft.clicked()
+                    break
+                case Qt.Key_D:
+                    buttonRotateRight.clicked()
+                    break
+            }
+            event.accepted = true
+        }
+    }
 }
