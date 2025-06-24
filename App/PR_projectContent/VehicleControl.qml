@@ -33,8 +33,11 @@ GroupItem {
             display: AbstractButton.TextUnderIcon
             transformOrigin: Item.Center
             z: 1
-            onClicked: {
+            onPressed: {
                 tcpClient.sendMessage(messages.vehicleMoveForward)
+            }
+            onReleased: {
+                tcpClient.sendMessage(messages.vehicleStop)
             }
         }
     }
@@ -64,8 +67,11 @@ GroupItem {
             icon.source: "images/arrow-downward.png"
             z: 1
             transformOrigin: Item.Center
-            onClicked: {
+            onPressed: {
                 tcpClient.sendMessage(messages.vehicleReverse)
+            }
+            onReleased: {
+                tcpClient.sendMessage(messages.vehicleStop)
             }
         }
     }
@@ -95,8 +101,11 @@ GroupItem {
             icon.source: "images/arrow-turn-around-reverse.png"
             z: 1
             transformOrigin: Item.Center
-            onClicked: {
+            onPressed: {
                 tcpClient.sendMessage(messages.vehicleRotateLeft)
+            }
+            onReleased: {
+                tcpClient.sendMessage(messages.vehicleStop)
             }
         }
     }
@@ -126,27 +135,53 @@ GroupItem {
             icon.source: "images/arrow-turn-around.png"
             z: 1
             transformOrigin: Item.Center
-            onClicked: {
+            onPressed: {
                 tcpClient.sendMessage(messages.vehicleRotateRight)
+            }
+            onReleased: {
+                tcpClient.sendMessage(messages.vehicleStop)
             }
         }
     }
 
-    function handeKey(event) {
-        if (mainApp.wsadEnabled) {
+    function handleKeyPressed(event) {
+            if (mainApp.wsadEnabled && !event.isAutoRepeat) {
+                switch (event.key) {
+                    case Qt.Key_W:
+                        tcpClient.sendMessage(messages.vehicleMoveForward)
+                        break
+                    case Qt.Key_S:
+                        tcpClient.sendMessage(messages.vehicleReverse)
+                        break
+                    case Qt.Key_A:
+                        tcpClient.sendMessage(messages.vehicleRotateLeft)
+                        break
+                    case Qt.Key_D:
+                        tcpClient.sendMessage(messages.vehicleRotateRight)
+                        break
+                    case Qt.Key_Q:
+                        tcpClient.sendMessage(messages.cameraRotateLeft)
+                        break
+                    case Qt.Key_E:
+                        tcpClient.sendMessage(messages.cameraRotateRight)
+                        break
+                }
+                event.accepted = true
+            }
+        }
+
+    function handleKeyReleased(event) {
+        if (mainApp.wsadEnabled && !event.isAutoRepeat) {
             switch (event.key) {
                 case Qt.Key_W:
-                    buttonForward.clicked()
-                    break
                 case Qt.Key_S:
-                    buttonReverse.clicked()
-                    break
                 case Qt.Key_A:
-                    buttonRotateLeft.clicked()
-                    break
                 case Qt.Key_D:
-                    buttonRotateRight.clicked()
+                    tcpClient.sendMessage(messages.vehicleStop)
                     break
+                case Qt.Key_Q:
+                case Qt.Key_E:
+                    tcpClient.sendMessage(messages.cameraRotateStop)
             }
             event.accepted = true
         }
