@@ -43,7 +43,7 @@ def http_server():
     """Serwer HTTP do przesyłania pliku wideo"""
     app = Flask(__name__)
     local_ip = get_local_ip()
-    port = 8080
+    port = 5000
 
     @app.route('/stream.mp4')
     def stream_mp4():

@@ -132,9 +132,12 @@ Item {
             y: 0.7 * connectScreen.height
         }
     }
-    Keys.onPressed: {
-            vehicleControl.handeKey(event)
-            cameraControl.handleKey(event)
+    Keys.onPressed: (event) => {
+        vehicleControl.handleKeyPressed(event)
+    }
+
+    Keys.onReleased: (event) => {
+        vehicleControl.handleKeyReleased(event)
     }
     Component.onCompleted: screen01.forceActiveFocus()
 }

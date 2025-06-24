@@ -34,7 +34,7 @@ Window {
         target: tcpClient
         onConnectedToServer: {
             isConnecting = false
-            messages.cameraSource = "http://"+ tempCameraSourceIp +":8080/stream.mp4"
+            messages.cameraSource = "http://"+ tempCameraSourceIp +":5000/video_feed"
             currentScreen = "app"
             lastError = ""
         }

@@ -4,7 +4,6 @@ import QtQuick
 
 Rectangle {
     id: rectangleVideo
-    property string cameraSource: "http://"+ipInput.text+":8080/stream.mp4"
     MediaPlayer {
         id: player
         source: ""

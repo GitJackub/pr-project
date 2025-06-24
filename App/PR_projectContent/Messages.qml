@@ -2,13 +2,19 @@ import QtQuick
 
 QtObject {
     //      | type |      name         | Message content|
-    property string vehicleRotateRight: "Obrót w prawo"
-    property string vehicleRotateLeft: "Obrót w lewo"
-    property string vehicleMoveForward: "Do przodu"
-    property string vehicleReverse: "Wstecz"
-    property string cameraRotateRight: "Kamera w prawo"
-    property string cameraRotateLeft: "Kamera w lewo"
+    property string vehicleRotateRight: "6"
+    property string vehicleRotateLeft: "5"
+    property string vehicleMoveForward: "3"
+    property string vehicleReverse: "4"
+    property string vehicleStop: "0"
+
+    property string cameraRotateRight: "1"
+    property string cameraRotateLeft: "2"
+    property string cameraRotateStop: "0"
 
     // default source
-    property string cameraSource: "http://127.0.0.1:8080/stream.mp4"
+    property string cameraSource: ""
+
+    // to deploy
+    // windeployqt PR_projectApp.exe --qmldir=C:\Users\kubam\Documents\repos\pr-project\App-Release\qml
 }
