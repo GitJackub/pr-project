@@ -1,0 +1,68 @@
+import RPi.GPIO as GPIO
+import time
+
+# Piny PWM (EN) – BCM
+pwm_pins = [26, 25, 33, 32]  # UWAGA: GPIO 33 i 32 są niedostępne na Pi Zero! Patrz poniżej.
+# Piny kierunku
+dir_pins = [5, 18, 19, 21]
+
+# Konfiguracja GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+# Ustawienie pinów kierunku
+for pin in dir_pins:
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, GPIO.LOW)
+
+# Ustawienie pinów PWM
+pwms = []
+for pin in pwm_pins:
+    GPIO.setup(pin, GPIO.OUT)
+    pwm = GPIO.PWM(pin, 1000)  # częstotliwość 1 kHz
+    pwm.start(0)
+    pwms.append(pwm)
+
+def move_forward_backward(speed, forward):
+    GPIO.output(dir_pins[0], GPIO.HIGH if forward else GPIO.LOW)
+    GPIO.output(dir_pins[1], GPIO.HIGH if forward else GPIO.LOW)
+    GPIO.output(dir_pins[2], GPIO.LOW if forward else GPIO.HIGH)
+    GPIO.output(dir_pins[3], GPIO.LOW if forward else GPIO.HIGH)
+    for pwm in pwms:
+        pwm.ChangeDutyCycle(speed * 100 / 255)
+
+def rotate_right_left(speed, right):
+    GPIO.output(dir_pins[0], GPIO.HIGH if right else GPIO.LOW)
+    GPIO.output(dir_pins[1], GPIO.LOW if right else GPIO.HIGH)
+    GPIO.output(dir_pins[2], GPIO.LOW if right else GPIO.HIGH)
+    GPIO.output(dir_pins[3], GPIO.HIGH if right else GPIO.LOW)
+    for pwm in pwms:
+        pwm.ChangeDutyCycle(speed * 100 / 255)
+
+def standby():
+    for pin in dir_pins:
+        GPIO.output(pin, GPIO.LOW)
+
+# Główna pętla
+try:
+    while True:
+        rotate_right_left(200, True)  # jedź w prawo
+        time.sleep(2)
+
+        rotate_right_left(0, True)    # stop
+        time.sleep(1)
+
+        rotate_right_left(200, False) # jedź w lewo
+        time.sleep(2)
+
+        rotate_right_left(0, True)    # stop
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    pass
+
+finally:
+    for pwm in pwms:
+        pwm.stop()
+    GPIO.cleanup()
+
